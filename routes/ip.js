@@ -7,15 +7,27 @@ var router = express.Router();
 //
 //
 
-router.get('/', function(req, res, next) {
-  res.render('ip', { 
-  	title: 'IP',
-  	ip : myIp.address()
-  });
-});
+module.exports = function (myIp) {
+
+	router.get('/', function(req, res, next) {
+		res.render('ip', { 
+			ip : myIp.address()
+		});
+	});
+
+	router.get('/json', function(req, res, next) {
+		res.send({ ip: myIp.address() });
+	});
+
+	router.get('/text', function(req, res, next) {
+		res.type('text');
+		res.send(myIp.address());
+	});	
+
+	return router;
+
+};
 
 //
 //
 //
-
-module.exports = router;

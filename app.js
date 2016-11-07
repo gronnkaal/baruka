@@ -34,10 +34,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('myIp', ip);
-
 app.use('/', routeIndex);
-app.use('/ip', routeIp);
+app.use('/ip', routeIp(ip));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
