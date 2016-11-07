@@ -16,7 +16,7 @@ module.exports = function (myIp) {
 	});
 
 	router.get('/json', function(req, res, next) {
-		res.send({ ip: myIp.address() });
+		res.json({ ip: myIp.address() });
 	});
 
 	router.get('/text', function(req, res, next) {
