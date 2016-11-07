@@ -7,9 +7,10 @@ var router = express.Router();
 //
 //
 
-module.exports = function (myIp, myDns) {
+module.exports = function (myIp) {
 
 	router.get('/', function(req, res, next) {
+
 		res.render('ip', { 
 			ip : myIp.address()
 		});
