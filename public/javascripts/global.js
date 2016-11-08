@@ -9,7 +9,7 @@ $(document).ready(function() {
 //
 
 function getMyIp() {
-  $.getJSON('/ip/json', function (data) {
+  $.getJSON('/ip', function (data) {
     $('#myIp').text(data.ip);
   });
 };

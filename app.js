@@ -16,7 +16,6 @@ var ip			 = require('ip');
 // routes ============================================
 
 var routeIndex	= require('./routes/index');
-var routeNet	= require('./routes/net');
 var routeIp		= require('./routes/ip');
 
 //
@@ -37,7 +36,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routeIndex);
 app.use('/ip', routeIp(ip));
-app.use('/net', routeNet(ip));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
