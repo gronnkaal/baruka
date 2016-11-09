@@ -1,6 +1,73 @@
 extends layout
 
 block content
-  h1= title
-  p.lead A simpe application to check your IP
-  p Your IP: #[span#myIp]
+	h1= title
+	p.lead A simpe application to check your IP
+	p Your IP: #[span#myIp]
+
+	#meny
+		p
+			a.nav-space(href="/subnet") SUBNET
+			a.nav-space(href="/cidr") CIDR
+			a.nav-space(href="/netmask") PREFIX
+
+	br
+
+	if (showFormSubnet)
+		#formSubnet
+		form(role='form', action="/subnet",method="post", style='max-width: 300px;')
+			.form-group
+				input.form-control(type='net', name='net', placeholder='Network')
+			.form-group
+				input.form-control(type='mask', name='mask', placeholder='Netmask')
+			button.btn.btn-warning(type='submit') Submit
+
+	if (showFormCidr)
+		#formCidr
+		form(role='form', action="/cidr",method="post", style='max-width: 300px;')
+			.form-group
+				input.form-control(type='net', name='net', placeholder='Network')
+			.form-group
+				input.form-control(type='mask', name='prefix', placeholder='Prefix')
+			button.btn.btn-warning(type='submit') Submit
+
+	if (showFormNetmask)
+		#formNetmask
+		form(role='form', action="/netmask",method="post", style='max-width: 300px;')
+			.form-group
+				input.form-control(type='net', name='prefix', placeholder='Prefix')
+			button.btn.btn-warning(type='submit') Submit
+	br
+
+	if (myDataNet)
+		#response
+			.resp-background
+				.resp-xs-1
+					p Address:
+					p Netmask:
+					br
+					p Network:
+					p HostMin:
+					p HostMax:
+					p Broadcast:
+					p Hosts:
+				.resp-xs-2
+					p #{myDataNet.ipAddress}
+					p #{myDataNet.ipSubnetMask}
+					br
+					p #{myDataNet.ipAddress}/#{myDataNet.ipSubnetMaskLength}
+					p #{myDataNet.ipAddressFirst} 
+					p #{myDataNet.ipAddressLast}
+					p #{myDataNet.ipBroadcast}
+					p #{myDataNet.ipNumHosts}
+				.resp-xs-3
+
+	if (myDataNetmask)
+		#response
+			.resp-background
+				.resp-xs-1
+					p Netmask:
+				.resp-xs-2
+					p #{myDataNetmask.netmask}
+
+
