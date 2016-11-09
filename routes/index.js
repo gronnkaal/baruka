@@ -97,10 +97,5 @@ function getJson (myUrl, callback) {
 	});
 };
 
-function getUrl (req, res, next) {
-	var myVar = req.originalUrl;
-	myVar = myVar.substr(1);
-	return myVar;
-};
 
 module.exports = router;
