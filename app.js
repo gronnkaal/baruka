@@ -18,9 +18,17 @@ var ip			 = require('ip');
 var routeIndex	= require('./routes/index');
 var routeIp		= require('./routes/ip');
 
+// config ============================================
+
+var configApiUrl = process.env.API_URL;
+
 //
 //
 //
+
+// define a variable accessable to all views
+
+app.set('apiUrl', configApiUrl);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
