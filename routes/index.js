@@ -49,6 +49,7 @@ router.post('/subnet', function(req, res, next) {
 	var url = api + "/ip/subnet/" + req.body.net + "/" + req.body.mask;
 
 	getJson(url, function (abc) {
+		console.log(abc);
 		return res.render('index', {
 			title: 'Baruka',
 			myDataNet: abc,
@@ -64,6 +65,7 @@ router.post('/cidr', function(req, res, next) {
 	var url = api + "/ip/cidr/" + req.body.net + "/" + req.body.prefix;
 
 	getJson(url, function (abc) {
+		console.log(abc);
 		return res.render('index', {
 			title: 'Baruka',
 			myDataNet: abc,
@@ -80,6 +82,7 @@ router.post('/netmask', function(req, res, next) {
 	var url = api + "/ip/netmask/" + req.body.prefix;
 
 	getJson(url, function (abc) {
+		console.log(abc);
 		return res.render('index', {
 			title: 'Baruka',
 			myDataNetmask: abc,
@@ -101,7 +104,9 @@ function getJson (myUrl, callback) {
 		if (!error && response.statusCode == 200) {
 			return callback(body);
 		} else {
-			console.log(error);
+			return callback({ 
+				error: 'Oops.. something went wrong!',
+			});
 		};
 	});
 };

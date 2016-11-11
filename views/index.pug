@@ -41,33 +41,41 @@ block content
 
 	if (myDataNet)
 		#response
-			.resp-background
-				.resp-xs-1
-					p Address:
-					p Netmask:
-					br
-					p Network:
-					p HostMin:
-					p HostMax:
-					p Broadcast:
-					p Hosts:
-				.resp-xs-2
-					p #{myDataNet.ipAddress}
-					p #{myDataNet.ipSubnetMask}
-					br
-					p #{myDataNet.ipAddress}/#{myDataNet.ipSubnetMaskLength}
-					p #{myDataNet.ipAddressFirst} 
-					p #{myDataNet.ipAddressLast}
-					p #{myDataNet.ipBroadcast}
-					p #{myDataNet.ipNumHosts}
-				.resp-xs-3
+			if (myDataNet.error)
+				.resp-background-err
+					p Error: #{myDataNet.error}
+			else
+				.resp-background-ok
+					.resp-xs-1
+						p Address:
+						p Netmask:
+						br
+						p Network:
+						p HostMin:
+						p HostMax:
+						p Broadcast:
+						p Hosts:
+					.resp-xs-2
+						p #{myDataNet.ipAddress}
+						p #{myDataNet.ipSubnetMask}
+						br
+						p #{myDataNet.ipAddress}/#{myDataNet.ipSubnetMaskLength}
+						p #{myDataNet.ipAddressFirst} 
+						p #{myDataNet.ipAddressLast}
+						p #{myDataNet.ipBroadcast}
+						p #{myDataNet.ipNumHosts}
+					.resp-xs-3
 
 	if (myDataNetmask)
 		#response
-			.resp-background
-				.resp-xs-1
-					p Netmask:
-				.resp-xs-2
-					p #{myDataNetmask.netmask}
+			if (myDataNetmask.error)
+				.resp-background-err
+					p Error: #{myDataNet.error}
+			else
+				.resp-background-ok
+					.resp-xs-1
+						p Netmask:
+					.resp-xs-2
+						p #{myDataNetmask.netmask}
 
 
