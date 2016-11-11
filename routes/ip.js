@@ -17,18 +17,14 @@ module.exports = function (myIp, myValidate) {
 
 	router.get('/netmask/:netmaskPrefix', function(req, res, next) {
 
-		var myError;
+		var myError = "";
 		var myPrefix = req.params.netmaskPrefix;
 
-		if (myValidate.isNumeric(myPrefix) == false) {
-			myError = "Prefix is not valid, should be numeric";
+		if (myValidate.isNumeric(myPrefix) == false || isBetween(myPrefix, 1, 32) == false) {
+			myError = "Prefix is not valid, should be numeric and between 1 and 32";
 		};
 
-		if (isBetween(myPrefix, 1, 32) == false) {
-			myError = "Prefix is not valid, should be between 1 and 32";
-		};
-
-		if (myError.length() > 0) {
+		if (myError.toString().length > 0) {
 			res.json({
 				error: myError,
 			});
@@ -42,15 +38,15 @@ module.exports = function (myIp, myValidate) {
 
 	router.get('/subnet/:subnetIp/:subnetNetmask', function(req, res, next) {
 
-		var myError;
+		var myError = "";
 		var ipNetwork = req.params.subnetIp;
 		var ipNetmask = req.params.subnetNetmask;
 
 		if (myValidate.isIP(ipNetwork) == false || myValidate.isIP(ipNetmask) == false) {
-			myError = "Network or Netmask is not valid";
+			myError = "Network or Netmask is not valid (network: 10.0.0.0, netmask: 255.255.255.0";
 		};
 
-		if (myError.length() > 0) {
+		if (myError.toString().length > 0) {
 			res.json({
 				error: myError,
 			});			
@@ -73,23 +69,15 @@ module.exports = function (myIp, myValidate) {
 
 	router.get('/cidr/:cidrIp/:cidrPrefix', function(req, res, next) {
 
-		var myError;
+		var myError = ""
 		var ipNetwork = req.params.cidrIp;
 		var ipPrefix = req.params.cidrPrefix;
 
-		if (myValidate.isIP(ipNetwork) == false) {
-			myError = "Network is not valid, ex: 10.0.0.0";
+		if (myValidate.isIP(ipNetwork) == false || myValidate.isNumeric(ipPrefix) == false || isBetween(ipPrefix, 1, 32) == false) {
+			myError = "Network or Prefix is not valid (network: 10.0.0.0, prefix: 24)";
 		};
 
-		if (myValidate.isNumeric(ipPrefix) == false) {
-			myError = "Prefix is not valid, should be numeric";
-		};
-
-		if (isBetween(ipPrefix, 1, 32) == false) {
-			myError = "Prefix is not valid, should be between 1 and 32";
-		};
-
-		if (myError.length() > 0) {
+		if (myError.toString().length > 0) {
 			res.json({
 				error: myError,
 			});			
