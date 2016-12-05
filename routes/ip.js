@@ -2,12 +2,13 @@
 
 var express = require('express');
 var router = express.Router();
+var myIp = require('ip');
 
 //
 //
 //
 
-module.exports = function (myIp, myValidate) {
+module.exports = function (myValidate) {
 
 	router.get('/', function(req, res, next) {
 		res.json({ 
