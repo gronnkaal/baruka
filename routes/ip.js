@@ -12,7 +12,7 @@ module.exports = function (myValidate) {
 
 	router.get('/', function(req, res, next) {
 		res.json({ 
-			ip: myIp.address() 
+			ip: clientIp(req)
 		});
 	});
 
@@ -105,6 +105,16 @@ module.exports = function (myValidate) {
 };
 
 //
+//
+//
+
+function clientIp(req) {
+    return (req.headers["X-Forwarded-For"] ||
+            req.headers["x-forwarded-for"] ||
+            '').split(',')[0] ||
+           req.client.remoteAddress;
+};
+
 //
 //
 
