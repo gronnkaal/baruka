@@ -106,7 +106,6 @@ module.exports = function (myValidate) {
 
 //
 //
-//
 
 function clientIp(req) {
     return (req.headers["X-Forwarded-For"] ||
